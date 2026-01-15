@@ -1,0 +1,12 @@
+{
+    "bicycle": "<v1> riding a bike",
+    "boat_sailing": "<v2> traveling",
+    "bus_traveling": "<v3> running",
+    "car-roundabout": "<v4> running",
+    "car-turn": "<v5> running",
+    "lifting": "<v6> lifting weights",
+    "playing_flute": "<v7> playing the flute",
+    "playingGuitar": "<v8> playing the guitar",
+    "playingpiano": "<v9> playing the piano",
+    "skateboarding": "<v10> skateboarding"
+}

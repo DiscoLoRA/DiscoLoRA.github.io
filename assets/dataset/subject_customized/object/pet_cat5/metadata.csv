@@ -1,0 +1,10 @@
+video,mask,prompt_sub,prompt_sty
+pet_cat5/images/00.jpg,pet_cat5/masks/00.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/01.jpg,pet_cat5/masks/01.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/02.jpg,pet_cat5/masks/02.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/03.jpg,pet_cat5/masks/03.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/04.jpg,pet_cat5/masks/04.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/05.jpg,pet_cat5/masks/05.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/06.jpg,pet_cat5/masks/06.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/07.jpg,pet_cat5/masks/07.png,A picture of <o12> cat.,in <s> style.
+pet_cat5/images/08.jpg,pet_cat5/masks/08.png,A picture of <o12> cat.,in <s> style.

@@ -1,0 +1,13 @@
+{
+    "move_around1": "<c1> camera moves around.",
+    "move_around2": "<c2> camera moves around.",
+    "move_around3": "<c3> camera moves around.",
+    "move_down": "<c4> camera moves down.",
+    "move_forward": "<c5> camera moves forward.",
+    "move_left": "<c6> camera moves left",
+    "move_right": "<c7> camera moves right.",
+    "move_up": "<c8> camera moves up",
+    "zoom_in": "<c9> camera zooms in.",
+    "zoom_out": "<c10> camera zooms out",
+    "zoom_out_high": "<c11> camera zooms out from a high position."
+}

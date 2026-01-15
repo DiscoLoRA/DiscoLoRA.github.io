@@ -1,0 +1,6 @@
+video,mask,prompt_sub,prompt_sty
+cat2/images/00.jpg,cat2/masks/00.png,A picture of <o2> cat.,in <s> style.
+cat2/images/01.jpg,cat2/masks/01.png,A picture of <o2> cat.,in <s> style.
+cat2/images/02.jpg,cat2/masks/02.png,A picture of <o2> cat.,in <s> style.
+cat2/images/03.jpg,cat2/masks/03.png,A picture of <o2> cat.,in <s> style.
+cat2/images/04.jpg,cat2/masks/04.png,A picture of <o2> cat.,in <s> style.

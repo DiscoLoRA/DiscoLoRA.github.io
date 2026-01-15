@@ -1,0 +1,6 @@
+video,mask,prompt_sub,prompt_sty
+dog6/images/00.jpg,dog6/masks/00.png,A picture of <o7> dog.,in <s> style.
+dog6/images/01.jpg,dog6/masks/01.png,A picture of <o7> dog.,in <s> style.
+dog6/images/02.jpg,dog6/masks/02.png,A picture of <o7> dog.,in <s> style.
+dog6/images/03.jpg,dog6/masks/03.png,A picture of <o7> dog.,in <s> style.
+dog6/images/04.jpg,dog6/masks/04.png,A picture of <o7> dog.,in <s> style.

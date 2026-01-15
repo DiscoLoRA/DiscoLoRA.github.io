@@ -1,0 +1,6 @@
+video,mask,prompt_sub,prompt_sty
+pet_cat1/images/00.jpg,pet_cat1/masks/00.png,A picture of <o11> cat.,in <s> style.
+pet_cat1/images/01.jpg,pet_cat1/masks/01.png,A picture of <o11> cat.,in <s> style.
+pet_cat1/images/02.jpg,pet_cat1/masks/02.png,A picture of <o11> cat.,in <s> style.
+pet_cat1/images/03.jpg,pet_cat1/masks/03.png,A picture of <o11> cat.,in <s> style.
+pet_cat1/images/04.jpg,pet_cat1/masks/04.png,A picture of <o11> cat.,in <s> style.

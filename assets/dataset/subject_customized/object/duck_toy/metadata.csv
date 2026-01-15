@@ -1,0 +1,5 @@
+video,mask,prompt_sub,prompt_sty
+duck_toy/images/00.jpg,duck_toy/masks/00.png,A picture of <o10> duck.,in <s> toy style.
+duck_toy/images/01.jpg,duck_toy/masks/01.png,A picture of <o10> duck.,in <s> toy style.
+duck_toy/images/02.jpg,duck_toy/masks/02.png,A picture of <o10> duck.,in <s> toy style.
+duck_toy/images/03.jpg,duck_toy/masks/03.png,A picture of <o10> duck.,in <s> toy style.

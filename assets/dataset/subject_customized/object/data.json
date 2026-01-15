@@ -1,0 +1,22 @@
+{
+    "bear_plushie": "<o1> bear",
+    "cat2": "<o2> cat",
+    "dog": "<o3> dog",
+    "dog2": "<o4> dog",
+    "dog3": "<o5> dog",
+    "dog5": "<o6> dog",
+    "dog6": "<o7> dog",
+    "dog7": "<o8> dog",
+    "dog8": "<o9> dog",
+    "duck_toy": "<o10> duck",
+    "pet_cat1": "<o11> cat",
+    "pet_cat5": "<o12> cat",
+    "pet_cat7": "<o13> cat",
+    "pink_plushie": "<o14> toy",
+    "plushie_panda": "<o15> panda",
+    "plushie_teddybear": "<o16> teddybear",
+    "plushie_tortoise": "<o17> tortoise",
+    "terracotta_warrior": "<o18> terracotta warrior",
+    "toy_bear": "<o19> bear",
+    "wolf_plushie": "<o20> wolf"
+}

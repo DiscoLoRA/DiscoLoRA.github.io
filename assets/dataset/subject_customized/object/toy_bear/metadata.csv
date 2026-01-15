@@ -1,0 +1,5 @@
+video,mask,prompt_sub,prompt_sty
+toy_bear/images/00.jpg,toy_bear/masks/00.png,A picture of <o19> bear.,in <s> style.
+toy_bear/images/01.jpg,toy_bear/masks/01.png,A picture of <o19> bear.,in <s> style.
+toy_bear/images/02.jpg,toy_bear/masks/02.png,A picture of <o19> bear.,in <s> style.
+toy_bear/images/03.jpg,toy_bear/masks/03.png,A picture of <o19> bear.,in <s> style.

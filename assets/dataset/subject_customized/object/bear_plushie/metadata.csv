@@ -1,0 +1,6 @@
+video,mask,prompt_sub,prompt_sty
+bear_plushie/images/00.jpg,bear_plushie/masks/00.jpg,A picture of <o1> bear.,in <s> plushie style.
+bear_plushie/images/01.jpg,bear_plushie/masks/01.jpg,A picture of <o1> bear.,in <s> plushie style.
+bear_plushie/images/02.jpg,bear_plushie/masks/02.jpg,A picture of <o1> bear.,in <s> plushie style.
+bear_plushie/images/03.jpg,bear_plushie/masks/03.jpg,A picture of <o1> bear.,in <s> plushie style.
+bear_plushie/images/04.jpg,bear_plushie/masks/04.jpg,A picture of <o1> bear.,in <s> plushie style.
