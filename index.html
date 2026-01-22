@@ -103,7 +103,7 @@
       <div class="container is-max-desktop">
         <!-- <div class="hero-body"> -->
         <video poster="" id="tree" controls muted loop height="100%">
-          <source src="static/mp4/overview.mp4"
+          <source src="static/mp4/demo_video.mp4"
             type="video/mp4">
         </video>
         </h2>
@@ -122,7 +122,7 @@
         <!-- <h2 class="title is-3">Abstract</h2> -->
         <div class="content has-text-justified">
           <p>
-            Video customization based on Text-to-Video (T2V) models aims to learn specific features from reference data to generate controllable videos. While significant strides have been made in image stylization and video motion customization, simultaneously controlling multiple concepts, such as content, style, and motion, remains a major challenge.In this work, we pioneer the systematic definition of the multi-concept Video customization task. To facilitate research in this area, we construct a comprehensive benchmark and propose DisCo-LoRA, a unified framework designed to tackle this problem by disentangling and flexibly recombining different concepts in two stages:(1) We propose an Iterative Dual-LoRA framework that decomposes the objective into Content-Style and Content-Motion sub-tasks. Through alternating optimization paired with complementary prompting and time-aware masking, our method effectively learns distinct attributes from unpaired data while preventing global overfitting.(2) To mitigate content dominance during composition, we propose a Z-score-based statistical regularization to align layer-wise weight distributions. This preserves categorical trends while reducing interference between heterogeneous LoRAs.Extensive experiments demonstrate that Disco-LoRA excels in multi-concept video customization by effectively preserving appearance consistency, artistic style, and motion patterns, proving its effectiveness in controllable text-to-video generation. 
+            Video customization based on Text-to-Video (T2V) models aims to learn specific features from reference data to generate controllable videos. While significant strides have been made in image stylization and video motion customization, simultaneously controlling multiple concepts, such as content, style, and motion, remains a major challenge. In this work, we pioneer the systematic definition of the multi-concept Video customization task. To facilitate research in this area, we construct a comprehensive benchmark and propose DisCo-LoRA, a unified framework designed to tackle this problem by disentangling and flexibly recombining different concepts in two stages: (1) We decompose the objective into two sub-tasks: Content-Style and Content-Motion. Each sub-task is addressed using our Iterative Dual-LoRA Disentanglement Framework, which effectively disentangles distinct concepts within the data. (2) We identify layer-wise weight trends as crucial for LoRA identity, while weight magnitudes dictate composability. To harmonize these scales, we propose a Z-score-based statistical regularization that aligns weight distributions, preserving layer-wise trends while minimizing interference between different LoRAs. Extensive experiments show that Disco-LoRA excels in multi-concept video customization, effectively preserving appearance, style, and motion for controllable text-to-video generation.
           </p>
         </div>
         <!-- </div> -->
@@ -161,13 +161,13 @@
     <!-- <section class="hero is-light"> -->
     <div class="hero-body">
       <div class="container is-max-desktop is-centered has-text-centered">
-        <h2 class="title is-3">Overall Framework of SMRABooth</h2>
+        <h2 class="title is-3">Overall Framework of Disco-LoRA</h2>
         <div class="item">
           <!-- Your image here -->
           <img src="static/images/pipeline.png"
-            alt="SMRABooth Framework" />
+            alt="Disco-LoRA Framework" />
           <h2 class="content has-text-justified">
-            Overview of SMRABooth. Our method splits customized video generation into two stages: subject learning and motion learning. Subject learning aligns global spatial features from the vision encoder to enhance fidelity, while motion learning utilizes temporal motion representations from the optical flow encoder to guide motion generation. The pretrained video diffusion model remains frozen during training, and LoRAs are merged at inference to generate customized videos. For simplicity, text input is omitted from the figure.
+            Overview of Disco-LoRA. We independently train Content, Style, and Motion using our Iterative Dual-LoRA Disentanglement Framework. We simultaneously train a Target LoRA alongside a LoRA to be disentangled for each data, utilizing the Target LoRA for the final output. Furthermore, we apply Z-Score-Based Statistical Regularization to constrain parameter distributions and prevent concept bleeding. This design realizes free-form multi-concept video customization during inference.
           </h2>
         </div>
       </div>
@@ -191,7 +191,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 1.1</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/bear_plushie/images/00.jpg" alt="bear plushie" style="border-radius: 10px;">
@@ -221,22 +221,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task1/task1_1/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_1/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task1/task1_1/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_1/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -257,7 +257,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 1.2</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/duck_toy/images/00.jpg" alt="duck toy" style="border-radius: 10px;">
@@ -287,22 +287,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task1/task1_2/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_2/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task1/task1_2/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_2/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -323,7 +323,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 1.3</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/terracotta_warrior/images/00.jpg" alt="terracotta warrior" style="border-radius: 10px;">
@@ -353,22 +353,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task1/task1_3/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_3/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task1/task1_3/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_3/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -389,7 +389,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 1.4</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/pet_cat7/images/00.jpg" alt="cat" style="border-radius: 10px;">
@@ -419,22 +419,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task1/task1_4/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_4/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task1/task1_4/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task1/task1_4/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -470,7 +470,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 2.1</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/terracotta_warrior/images/00.jpg" alt="terracotta warrior" style="border-radius: 10px;">
@@ -500,22 +500,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task2/task2_1/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_1/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task2/task2_1/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_1/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -536,7 +536,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 2.2</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/dog8/images/00.jpg" alt="dog" style="border-radius: 10px;">
@@ -566,22 +566,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task2/task2_2/Motiondirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_2/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task2/task2_2/Motiondirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_2/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -602,7 +602,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 2.3</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/terracotta_warrior/images/00.jpg" alt="terracotta warrior" style="border-radius: 10px;">
@@ -632,22 +632,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task2/task2_3/Motiondirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_3/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task2/task2_3/Motiondirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_3/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -668,7 +668,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 2.4</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/plushie_teddybear/images/00.jpg" alt="teddy bear" style="border-radius: 10px;">
@@ -698,22 +698,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task2/task2_4/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_4/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task2/task2_4/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task2/task2_4/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -749,7 +749,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 3.1</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/pink_plushie/images/00.jpg" alt="toy" style="border-radius: 10px;">
@@ -779,22 +779,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task3/task3_1/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_1/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task3/task3_1/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_1/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -815,7 +815,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 3.2</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/cat2/images/00.jpg" alt="cat" style="border-radius: 10px;">
@@ -845,22 +845,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task3/task3_2/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_2/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task3/task3_2/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_2/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -881,7 +881,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 3.3</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/dog6/images/00.jpg" alt="dog" style="border-radius: 10px;">
@@ -911,22 +911,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task3/task3_3/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_3/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task3/task3_3/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_3/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -947,7 +947,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 3.4</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/toy_bear/images/00.jpg" alt="bear" style="border-radius: 10px;">
@@ -977,22 +977,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task3/task3_4/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_4/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task3/task3_4/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task3/task3_4/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -1028,7 +1028,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 4.1</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/dog3/images/00.jpg" alt="dog" style="border-radius: 10px;">
@@ -1058,22 +1058,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task4/task4_1/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_1/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task4/task4_1/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_1/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -1094,7 +1094,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 4.2</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/pet_cat7/images/00.jpg" alt="cat" style="border-radius: 10px;">
@@ -1124,22 +1124,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task4/task4_2/MotionDirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_2/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task4/task4_2/MotionDirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_2/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -1160,7 +1160,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 4.3</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/plushie_panda/images/00.jpg" alt="panda" style="border-radius: 10px;">
@@ -1190,22 +1190,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task4/task4_3/Motiondirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_3/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task4/task4_3/Motiondirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_3/FlexiAct.mp4" type="video/mp4">
                 </video>
@@ -1226,7 +1226,7 @@
             <h3 class="title is-5" style="margin-bottom: 1.5rem;">Task 4.4</h3>
             
             <!-- Input Section -->
-            <div class="columns is-centered" style="margin-bottom: 2rem;">
+            <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
               <div class="column is-2 has-text-centered">
                 <figure class="image" style="margin: 0 auto; max-width: 150px;">
                   <img src="assets/dataset/subject_customized/object/dog8/images/00.jpg" alt="dog" style="border-radius: 10px;">
@@ -1256,22 +1256,22 @@
             <!-- Methods Comparison - 2x2 Grid -->
             <div class="columns is-centered" style="margin-bottom: 1rem;">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
-                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
-                  <source src="assets/pages/task4/task4_4/Motiondirector.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="column is-4 has-text-centered">
                 <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>DreamBooth</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_4/DreamBooth.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="column is-4 has-text-centered">
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>MotionDirector</b></p>
+                <video muted autoplay loop style="border-radius: 10px; width: 100%;">
+                  <source src="assets/pages/task4/task4_4/Motiondirector.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             
             <div class="columns is-centered">
               <div class="column is-4 has-text-centered">
-                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>FlexiAct</b></p>
+                <p class="subtitle is-6" style="margin-bottom: 0.5rem;"><b>UnzipLoRA+FlexiAct</b></p>
                 <video muted autoplay loop style="border-radius: 10px; width: 100%;">
                   <source src="assets/pages/task4/task4_4/FlexiAct.mp4" type="video/mp4">
                 </video>
